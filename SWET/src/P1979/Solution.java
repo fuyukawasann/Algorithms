@@ -6,25 +6,25 @@ import java.util.*;
 class Solution {
 
 	public static void main(String[] args) throws Exception {
-		// ÆÄÀÏ ÀĞ±â
+		// íŒŒì¼ ì½ê¸°
 		System.setIn(new FileInputStream("src/P1979/input.txt"));
-		// ¶óÀÌºê·¯¸®
+		// ë¼ì´ë¸ŒëŸ¬ë¦¬
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st;
 		
-		// Å×ÄÉ Ã³¸®
+		// í…Œì¼€ ì²˜ë¦¬
 		int T = Integer.parseInt(br.readLine());
 		
 		for(int t = 1; t <= T; t++) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("#").append(t).append(" ");
 			
-			// N°ú K¸¦ ¹Ş´Â´Ù.
+			// Nê³¼ Kë¥¼ ë°›ëŠ”ë‹¤.
 			st = new StringTokenizer(br.readLine());
 			int N = Integer.parseInt(st.nextToken()), K = Integer.parseInt(st.nextToken());
 			
-			// ºóÄ­À» ¹Ş´Â´Ù.
+			// ë¹ˆì¹¸ì„ ë°›ëŠ”ë‹¤.
 			int[][] blank = new int[N][N];
 			
 			for(int i = 0; i < N; i++) {
@@ -34,73 +34,73 @@ class Solution {
 				}
 			}
 			
-			// 1ÀÏ ¶§¸¸ Å½»öÀ» ÇÑ´Ù.
+			// 1ì¼ ë•Œë§Œ íƒìƒ‰ì„ í•œë‹¤.
 			int result = 0;
 			for(int i = 0; i < N; i++) {
 				for(int j = 0; j < N; j++) {
-					// 0ÀÏ ¶§´Â °Ç³Ê¶Ú´Ù.
+					// 0ì¼ ë•ŒëŠ” ê±´ë„ˆë›´ë‹¤.
 					if(blank[i][j] == 0) continue;
 					
-					// 1ÀÏ ¶§´Â Å½»öÇÑ´Ù.
-					// 1. ¿À¸¥ÂÊ Å½»ö
-					// 1) ¸¸¾à ¿ŞÂÊÀ¸·Î °¥ ¼ö ÀÖ´Ù¸é ÀÌ ÁöÁ¡Àº ´Ü¾î ½ÃÀÛÁ¡ÀÌ ¾Æ´Ô
-					// ¿ŞÂÊÀÌ ¸Ê ¾ÈÀÏ ¶§
+					// 1ì¼ ë•ŒëŠ” íƒìƒ‰í•œë‹¤.
+					// 1. ì˜¤ë¥¸ìª½ íƒìƒ‰
+					// 1) ë§Œì•½ ì™¼ìª½ìœ¼ë¡œ ê°ˆ ìˆ˜ ìˆë‹¤ë©´ ì´ ì§€ì ì€ ë‹¨ì–´ ì‹œì‘ì ì´ ì•„ë‹˜
+					// ì™¼ìª½ì´ ë§µ ì•ˆì¼ ë•Œ
 					boolean rightValid = true;
 					if(0 <= j - 1 && j - 1 < N) {
-						// 1ÀÌ¸é À¯È¿ÇÏÁö ¾ÊÀ½
+						// 1ì´ë©´ ìœ íš¨í•˜ì§€ ì•ŠìŒ
 						if(blank[i][j - 1] == 1) rightValid = false;
 					}
-					// 2) ¾Æ´Ï¸é ¿À¸¥ÂÊÀ¸·Î 1ÀÌ ¸î °³ ÀÖ´ÂÁö Å½»ö
+					// 2) ì•„ë‹ˆë©´ ì˜¤ë¥¸ìª½ìœ¼ë¡œ 1ì´ ëª‡ ê°œ ìˆëŠ”ì§€ íƒìƒ‰
 					int count = 1;
 					if(rightValid) {
-						// ¿À¸¥ÂÊ ¸Ê ³¡±îÁö °¡°Å³ª 0ÀÌ ³ª¿Ã ¶§±îÁö °£´Ù.
+						// ì˜¤ë¥¸ìª½ ë§µ ëê¹Œì§€ ê°€ê±°ë‚˜ 0ì´ ë‚˜ì˜¬ ë•Œê¹Œì§€ ê°„ë‹¤.
 						int x = j + 1;
 						while(x < N) {
-							// 0ÀÎÁö È®ÀÎÇÏ°í 0ÀÌ¸é break
+							// 0ì¸ì§€ í™•ì¸í•˜ê³  0ì´ë©´ break
 							if(blank[i][x] == 0) break;
-							// 1ÀÌ¸é count¸¦ ¿Ã¸®°í x ¾÷µ¥ÀÌÆ®
+							// 1ì´ë©´ countë¥¼ ì˜¬ë¦¬ê³  x ì—…ë°ì´íŠ¸
 							count++;
 							x++;
 						}
 					}
-					// count°¡ k¿Í °°´Ù¸é result¸¦ ¿Ã¸²
+					// countê°€ kì™€ ê°™ë‹¤ë©´ resultë¥¼ ì˜¬ë¦¼
 					if(count == K) result++;
-					// 2. ¾Æ·¡ÂÊ Å½»ö
-					// 1) ¸¸¾à À§ÂÊÀ¸·Î °¥ ¼ö ÀÖµû¸é ÀÌ ÁöÁ¡Àº ´Ü¾î ½ÃÀÛÁ¡ÀÌ ¾Æ´Ô
+					// 2. ì•„ë˜ìª½ íƒìƒ‰
+					// 1) ë§Œì•½ ìœ„ìª½ìœ¼ë¡œ ê°ˆ ìˆ˜ ìˆë”°ë©´ ì´ ì§€ì ì€ ë‹¨ì–´ ì‹œì‘ì ì´ ì•„ë‹˜
 					boolean underValid = true;
-					// À§ÂÊÀÌ ¸Ê ¾ÈÀÏ ¶§
+					// ìœ„ìª½ì´ ë§µ ì•ˆì¼ ë•Œ
 					if(0 <= i - 1 && i - 1 < N) {
-						// 1ÀÌ¸é À¯È¿ÇÏÁö ¾ÊÀ½
+						// 1ì´ë©´ ìœ íš¨í•˜ì§€ ì•ŠìŒ
 						if(blank[i - 1][j] == 1) underValid = false;
 					}
-					// 2) ¾Æ´Ï¸é ¾Æ·¡Á·À¸·Î 1ÀÌ ¸î °³ ÀÖ´ÂÁö Å½»ö
+					// 2) ì•„ë‹ˆë©´ ì•„ë˜ì¡±ìœ¼ë¡œ 1ì´ ëª‡ ê°œ ìˆëŠ”ì§€ íƒìƒ‰
 					count = 1;
 					if(underValid) {
-						// ¾Æ·¡ÂÊÀ¸·Î ³¡±îÁö °¡°Å³ª 0ÀÌ ³ª¿Ã ¶§±îÁö °£´Ù.
+						// ì•„ë˜ìª½ìœ¼ë¡œ ëê¹Œì§€ ê°€ê±°ë‚˜ 0ì´ ë‚˜ì˜¬ ë•Œê¹Œì§€ ê°„ë‹¤.
 						int y = i + 1;
 						while(y < N) {
-							// 0ÀÎÁö È®ÀÎÇÏ°í 0ÀÌ¸é break
+							// 0ì¸ì§€ í™•ì¸í•˜ê³  0ì´ë©´ break
 							if(blank[y][j] == 0) break;
-							// 1ÀÌ¸é count¸¦ ¿Ã¸®°í y ¾÷µ¥ÀÌÆ®
+							// 1ì´ë©´ countë¥¼ ì˜¬ë¦¬ê³  y ì—…ë°ì´íŠ¸
 							count++;
 							y++;
 						}
 					}
-					// count°¡ K¿Í °°´Ù¸é result¸¦ ¿Ã¸²
+					// countê°€ Kì™€ ê°™ë‹¤ë©´ resultë¥¼ ì˜¬ë¦¼
 					if(count == K) result++;
 				}
 			}
 			
-			// Á¤´ä ÀÔ·Â
+			// ì •ë‹µ ì…ë ¥
 			sb.append(result).append("\n");
 			
-			// Á¤´ä Ãâ·Â
+			// ì •ë‹µ ì¶œë ¥
 			bw.write(sb.toString());
 			bw.flush();
 			
 		}
 		
-		// ÀÚ¿ø ¹İÈ¯
+		// ìì› ë°˜í™˜
 		bw.close();
 		br.close();
 
